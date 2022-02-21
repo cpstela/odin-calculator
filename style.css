@@ -4,13 +4,15 @@ body {
 }
 
 .btn-base{
+    margin-top: 10px;
+    margin-right: 5px;
     font-weight: bold;
     font-size: larger;
     width: 25%;
+    flex-grow: 1;
     display:inline-block;
     border: none;
     padding:0.7em 1.4em;
-    margin:0 0.3em 0.3em 0;
     border-radius:0.15em;
     box-sizing: border-box;
     text-decoration:none;
@@ -24,12 +26,12 @@ body {
     .btn-base:active{
     top:0.1em;
     }
-    @media all and (max-width:30em){
+    /*@media all and (max-width:30em){
     btn-base{
     display:block;
     margin:0.4em auto;
     }
-}
+}*/
 
 .bg-1 {
     background-color: #FCA311;
@@ -51,7 +53,7 @@ body {
 }
 
 .bg-5 {
-    background-color: #60cfff;
+    background-color: #ffec8f;
     color: black;
 }
 
@@ -63,11 +65,13 @@ body {
 }
 
 .screen {
-    color:#E8EDDF; 
+    color:#E8EDDF;
+    text-align: right; 
     font-size: 3em; 
     padding: 10px;
     border-radius: 5px;
-    font-family: sans-serif;
+    font-family:'digital_dismayregular', sans-serif;
+    font-variant-numeric: tabular-nums lining-nums;
 }    
 
 .row {
@@ -76,9 +80,25 @@ body {
 }
 
 .width-2 {
-    width: 50% !important;
+    width: calc(50% + 20px) !important;
+    flex-grow: 2 !important;
 }
 
 .width-3 {
-    width: 75% !important;
+    width: calc(75% + 30px) !important;
+    flex-grow: 3 !important;
+}
+
+.btn-right {
+    margin-right: 0px !important;
+}
+
+/*Font by Chequered Link*/
+@font-face {
+    font-family: 'digital_dismayregular';
+    src: url('digital_dismay-webfont.woff2') format('woff2'),
+         url('digital_dismay-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
 }
