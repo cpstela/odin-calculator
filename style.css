@@ -1,11 +1,14 @@
 body {
-    background-color: #CFDBD5;
     display: flex;
     justify-content: space-around;
-};
+}
 
-.button-yellow{
+.btn-base{
+    font-weight: bold;
+    font-size: larger;
+    width: 25%;
     display:inline-block;
+    border: none;
     padding:0.7em 1.4em;
     margin:0 0.3em 0.3em 0;
     border-radius:0.15em;
@@ -14,42 +17,68 @@ body {
     font-family:'Roboto',sans-serif;
     text-transform:uppercase;
     font-weight:400;
-    color:#242423;
-    background-color:#F5CB5C !important;
     box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
     text-align:center;
     position:relative;
     }
-    .button-yellow:active{
+    .btn-base:active{
     top:0.1em;
     }
     @media all and (max-width:30em){
-    button-yellow{
+    btn-base{
     display:block;
     margin:0.4em auto;
     }
 }
 
+.bg-1 {
+    background-color: #FCA311;
+    color: white;
+}
+.bg-2 {
+    background-color: black;
+    color: white;
+}
+
+.bg-3 {
+    background-color: #4a5154;
+    color: white;
+}
+
+.bg-4 { 
+    background-color: #838d91;
+    color: white;
+}
+
+.bg-5 {
+    background-color: #60cfff;
+    color: black;
+}
+
+.container {
+    padding: 25px; 
+    padding-top: 40px;
+    margin-top: 50px;
+    border-radius: 15px;
+}
+
+.screen {
+    color:#E8EDDF; 
+    font-size: 3em; 
+    padding: 10px;
+    border-radius: 5px;
+    font-family: sans-serif;
+}    
+
 .row {
     padding-top: 10px;
+    display: flex;
 }
 
-.gris {
-    background-color: #CFDBD5;
+.width-2 {
+    width: 50% !important;
 }
 
-.gris-clar {
-    background-color: #E8EDDF;
-}
-
-.gris-fosc {
-    background-color: #333533;
-}
-
-.negre {
-    background-color: #242423;
-}
-
-.groc {
-    background-color: #F5CB5C;
+.width-3 {
+    width: 75% !important;
 }
