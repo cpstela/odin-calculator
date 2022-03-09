@@ -6,33 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
     <link rel="stylesheet" href="style.css">
+    <script src="js-file.js" defer></script>
 </head>
 <body class="bg-5">
     <div class="container bg-3">
-        <div class="screen bg-2">888888888888</div>
         <div class="grid">
-            <!--Row 1-->
-            <button class="btn-base bg-4">7</button>
-            <button class="btn-base bg-4">8</button>
-            <button class="btn-base bg-4">9</button>
-            <button class="btn-base bg-1">/</button>
-            <!--Row 2-->
-            <button class="btn-base bg-4">4</button>
-            <button class="btn-base bg-4">5</button>
-            <button class="btn-base bg-4">6</button>
-            <button class="btn-base bg-1">*</button>
-            <!--Row 3-->
-            <button class="btn-base bg-4">1</button>
-            <button class="btn-base bg-4">2</button>
-            <button class="btn-base bg-4">3</button>
-            <button class="btn-base bg-1">-</button>
-            <!--Row 4-->
-            <button class="btn-base bg-4 item-0">0</button>
-            <button class="btn-base bg-4">.</button>
-            <button class="btn-base bg-1">+</button>
-            <!--Row 5-->
-            <button class="btn-base bg-1 item-clear">CLEAR</button>
-            <button class="btn-base bg-1">=</button>
+            <!--Screen-->
+            <div class="item-screen bg-2"></div>
+            <!--Button row 1-->
+            <button class="btn-base number bg-4" id="7">7</button>
+            <button class="btn-base number bg-4" id="8">8</button>
+            <button class="btn-base number bg-4" id="9">9</button>
+            <button class="btn-base bg-1" id="/">/</button>
+            <!--Button row 2-->
+            <button class="btn-base number bg-4" id="4">4</button>
+            <button class="btn-base number bg-4" id="5">5</button>
+            <button class="btn-base number bg-4" id="6">6</button>
+            <button class="btn-base bg-1" id="*">*</button>
+            <!--Button row 3-->
+            <button class="btn-base number bg-4" id="1">1</button>
+            <button class="btn-base number bg-4" id="2">2</button>
+            <button class="btn-base number bg-4" id="3">3</button>
+            <button class="btn-base bg-1" id="-">-</button>
+            <!--Button row 4-->
+            <button class="btn-base number bg-4 item-2" id="0">0</button>
+            <button class="btn-base bg-4" id=".">.</button>
+            <button class="btn-base bg-1" id="+">+</button>
+            <!--Button row 5-->
+            <button class="btn-base bg-1 item-2" id="clear">CLEAR</button>
+            <button class="btn-base bg-1" id="backspace">←</button>
+            <button class="btn-base bg-1" id="equals">=</button>
         </div>
     </div>
 </body>

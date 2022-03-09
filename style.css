@@ -5,7 +5,6 @@ body {
 
 .btn-base{
     margin-top: 10px;
-    margin-right: 5px;
     font-weight: bold;
     font-size: larger;
     display:inline-block;
@@ -24,12 +23,25 @@ body {
     .btn-base:active{
     top:0.1em;
     }
-    /*@media all and (max-width:30em){
-    btn-base{
-    display:block;
-    margin:0.4em auto;
-    }
-}*/
+
+.btn-disabled{
+    margin-top: 10px;
+    color: transparent !important;
+    font-weight: bold;
+    font-size: larger;
+    display:inline-block;
+    border: none;
+    padding:0.7em 1.4em;
+    border-radius:0.15em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    text-transform:uppercase;
+    font-weight:400;
+    box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+    text-align:center;
+    position:relative;
+}    
 
 .bg-1 {
     background-color: #FCA311;
@@ -60,39 +72,31 @@ body {
     padding-top: 40px;
     margin-top: 50px;
     border-radius: 15px;
-    box-shadow: inset 0 -1.25em 0 -0.35em rgb(0 0 0 / 17%);
+    box-shadow: inset 0 -1em 0 -0.35em rgb(0 0 0 / 17%);
     padding-bottom: 40px;
 }
 
-.screen {
-    color:#E8EDDF;
-    text-align: right; 
-    font-size: 3em; 
-    padding: 10px;
-    border-radius: 5px;
-    font-family:'digital_dismayregular', sans-serif;
-    font-variant-numeric: tabular-nums lining-nums;
-}    
-
 .grid {
     display: grid;
-    grid-template-columns: repeat(4, 70px [col-start])
+    grid-template-columns: repeat(4, 65px [col-start]);
+    column-gap: 0.3rem;
 }
 
-.item-0 {
+.item-screen {
+    color:#E8EDDF;
+    text-align: right; 
+    font-size: 3em;
+    padding: 10px;
+    border-radius: 5px;
+    font-family:'Roboto', sans-serif;
+    font-variant-numeric: tabular-nums lining-nums;
+    grid-column: 1 / span 4;
+}    
+
+.item-2 {
     grid-column: 1 / span 2;
 }
 
-.item-clear {
-    grid-column: 1 / span 3;
-}
-
-/*Font: Digital Dismay by Chequered Link*/
-@font-face {
-    font-family: 'digital_dismayregular';
-    src: url('digital_dismay-webfont.woff2') format('woff2'),
-         url('digital_dismay-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
+#backspace {
+    padding-left: 23px;
 }
