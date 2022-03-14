@@ -4,6 +4,7 @@ let num1 = '';
 let num2 = '';
 let operator = '';
 let result = '';
+let displayValue = '';
 screen.textContent = 0;
 
 const buttons = Array.from(document.querySelectorAll('.btn-base'));
@@ -21,60 +22,54 @@ function processInput(id) {
     case '6':
     case '7':
     case '8':
-    case '9':    
+    case '9': 
+    case '.': 
+      displayValue += id;
       if(operator === ''){
-        //add digit to num1
-        if (id!== '.' || (id === '.' && num1.includes('.') )) { //If it's a . we check if there already was one
-          num1 += id;
-          num1 = parseInt(num1, 10).toString(); //We remove any leading 0 by turning it into an int, but then we turn it back to string
-          display(num1);
-        } 
+        num1 = displayValue; 
       }else{
-        //add digit to num2;
-        if (id !== '.' || (id === '.' && num2.includes('.') )) { 
-          num2 += id;
-          num2 = parseInt(num2, 10).toString();
-          display(num2);
-        } 
+        num2 = displayValue; 
       }
       result = '';  
+      display(displayValue);
       break;
     case '+':
     case '-':
     case '*':
-    case '/':   
-      operator = id;  
-      screen.textContent = operator;
+    case '/': 
+      if(num1 !== '' && num2 !== '' && operator !== '') { //If we are concatenating operations, calculate what we already have
+        operate(operator, num1, num2);
+      }  
+      operator = id;
+      displayValue= '';
       if (result !== '') { //If there's a result it becomes num1 of the next operation
         num1 = result;
         result = ''; 
       }
+      screen.textContent = operator;
       break;
     case 'equals':
       if(num1 !== '' && num2 !== '' && operator !== '') {
         operate(operator, num1, num2);
-        console.log('ara result és ' + result)
         display(result);
         num1 = '';
         num2 = '';
         operator = '';
+        displayValue = result;
       };
       break;
-    case '.': 
-      addDot();
-      break;    
     case 'backspace':
       backspace();
       break;
-    case 'clear':      
+    case 'clear':    
       clear();
       break;
     default:
       alert("Can't process input.");
       break;    
   }
-  document.getElementById(".").classList.remove("btn-disabled"); //We enable the . button again
-  document.getElementById(".").classList.add("btn-base");
+  toggleDot() //We enable or disable the button based on displayValue
+  console.log("result és " + result);
 }  
 
 
@@ -92,7 +87,7 @@ function operate(operator, num1, num2) {
       case '/':
         if (num2 === '0') { //Prevent division by 0
           result = 0;
-          alert('Are you crazy?');
+          alert("Are you crazy?");
         } else {
           result = num1 / num2;
         }
@@ -103,51 +98,38 @@ function operate(operator, num1, num2) {
     }
 }
 
-function addDot() {
-  if(result ==='' && operator ===''){ //is it num1?
-    if (num1.includes(".")) {
-      document.getElementById(".").classList.remove("btn-base");
-      document.getElementById(".").classList.add("btn-disabled");
-    }
 
-  } else if(result ==='' && num2 !== ''){ //or num2?
-    if (num2.includes(".")) {
-      document.getElementById(".").classList.remove("btn-base");
-      document.getElementById(".").classList.add("btn-disabled");
-    }
-
-  } else if(result ==='' && operator !=='' && num2 ==='') { //or operator?
-    document.getElementById(".").classList.remove("btn-base");
-    document.getElementById(".").classList.add("btn-disabled");
-
-  } else { //or result?
-    document.getElementById(".").classList.remove("btn-base");
-    document.getElementById(".").classList.add("btn-disabled");
+function toggleDot() {
+  if (displayValue.toString().includes('.')) {
+    document.getElementById('.').classList.remove('btn-base'); //Disable . button
+    document.getElementById('.').classList.add('btn-disabled');
+    document.getElementById('.').disabled = true;
+  } else {
+    document.getElementById('.').classList.remove('btn-disabled'); //Enable . button
+    document.getElementById('.').classList.add('btn-base');
+    document.getElementById('.').disabled = false;
   }
 }
 
+
 function backspace() { 
+  let withoutLast = displayValue.toString().slice(0, -1);  
+  displayValue = withoutLast;
 
   if(result ==='' && operator ===''){ //is it num1?
-    let withoutLast = num1.slice(0, -1);  
-    num1 = withoutLast;
-    num1 === ''? display(0) : display (num1);
-
+    num1 = displayValue;
   } else if(result ==='' && num2 !== ''){ //or num2?
-    let withoutLast= num2.slice(0, -1);  
-    num2 = withoutLast;
-    num2 === ''? display(symbol) : display (num2);
-
+    num2 = displayValue
+    if (num2 === ''){ 
+      displayValue = operator;
+    } 
   } else if(result ==='' && operator !=='' && num2 ==='') { //or operator?
-    let withoutLast= operator.slice(0, -1);  
-    operator = withoutLast;
-    display(num1);
-
+    operator = displayValue;
+    displayValue = num1;   
   } else { //or result?
-    let withoutLast= result.toString().slice(0, -1);  
-    result= withoutLast;
-    result === ''? display(0) : display (result);
+    result = displayValue;
   }
+  display(displayValue);
 }
 
 
@@ -156,22 +138,99 @@ function clear() {
   num2 = '';
   operator = '';
   result = '';
+  displayValue = '';
   screen.textContent = 0;
 }
 
 
-function display(currentNumber) {
-  let shortenedNum= currentNumber.length > 9? currentNumber.slice(-9) : currentNumber; //Only show the last 9 digits so it doesn't overflow the screen
+function display(number) {
+  let shortenedNum= number.length > 9? number.slice(-9) : number; //Only show the last 9 digits so it doesn't overflow the screen
   
   if (shortenedNum.length === 0) { //If there are no digits, show a 0
-    screen.textContent = 0;
+    shortenedNum = 0;
   }
+
+
+  if(number.toString().includes('.')){ //If it's a decimal show the first 9. We have to pad it first so we can use slice.
+    let padded = number.toString().padEnd(9,' ');
+    shortenedNum = padded.slice(0,9);
+    shortenedNum = shortenedNum.trim();
+  }
+
   screen.textContent = shortenedNum;
 }
 
-//-Disable decimal si ja hi ha . I que torni a aparèixer quan toca.
-//-Solucionar que els decimals de les divisions overflow the screen
-//-Solucionar que encadenar diverses operacions et concatena strings
-//-Solucionar que a partir de 17 (o sigui 18) surten 0 i e i coses rares
-//-Simplificar l'if de display
-//-Simplificar el codi duplicat d'afegir dígil a num1 i num2
+
+document.addEventListener('keydown', keySupport); //Keyboard suport
+function keySupport(e) {
+  console.log(e.code);
+  switch(e.code) {
+    case 'Numpad0':
+    case 'Digit0':
+      processInput('0');
+      break
+    case 'Numpad1':
+    case 'Digit1':
+      processInput('1');
+      break
+    case 'Numpad2':
+    case 'Digit2':
+      processInput('2');
+      break   
+    case 'Numpad3':
+    case 'Digit3':
+      processInput('3');
+      break
+    case 'Numpad4':
+    case 'Digit4':
+      processInput('4');
+      break
+    case 'Numpad5':
+    case 'Digit5':
+      processInput('5');
+      break   
+    case 'Numpad6':
+    case 'Digit6':
+      processInput('6');
+      break
+    case 'Numpad7':
+    case 'Digit7':
+      processInput('7');
+      break
+    case 'Numpad8':
+    case 'Digit8':
+      processInput('8');
+      break   
+    case 'Numpad9':
+    case 'Digit9':
+      processInput('9');
+      break
+    case 'NumpadAdd':
+      processInput('+');
+      break
+    case 'NumpadSubtract':
+      processInput('-');
+      break   
+    case 'NumpadMultiply':
+      processInput('*');
+      break
+    case 'NumpadDivide':
+      processInput('/');
+      break
+    case 'KeyE':
+      processInput('equals');
+      break   
+    case 'Backspace':
+      processInput('backspace');
+      break
+    case 'Period':
+      processInput('.');
+      break   
+    case 'KeyC':
+      processInput('clear');
+      break                      
+  }
+}
+
+
+
