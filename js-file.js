@@ -217,8 +217,11 @@ function keySupport(e) {
     case 'NumpadDivide':
       processInput('/');
       break
-    case 'KeyE':
+    case 'Enter':
+    case 'NumpadEnter':
       processInput('equals');
+      e.preventDefault()
+      
       break   
     case 'Backspace':
       processInput('backspace');
@@ -233,6 +236,3 @@ function keySupport(e) {
   }
 }
 
-
-
-//Pk porres pots posar diversos punts? Pk una cosa és deshabiltiat el botó i l'altra sumar els punts
