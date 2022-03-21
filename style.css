@@ -91,6 +91,7 @@ body {
     font-family:'Roboto', sans-serif;
     font-variant-numeric: tabular-nums lining-nums;
     grid-column: 1 / span 4;
+    overflow: hidden;
 }    
 
 .item-2 {

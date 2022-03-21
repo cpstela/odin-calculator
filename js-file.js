@@ -24,14 +24,16 @@ function processInput(id) {
     case '8':
     case '9': 
     case '.': 
-      displayValue += id;
-      if(operator === ''){
+      if(!(id === '.' && displayValue.includes('.'))){ 
+        displayValue += id;
+        if(operator === ''){
         num1 = displayValue; 
-      }else{
+        }else{
         num2 = displayValue; 
+        }
+        result = '';  
+        display(displayValue);
       }
-      result = '';  
-      display(displayValue);
       break;
     case '+':
     case '-':
@@ -69,7 +71,6 @@ function processInput(id) {
       break;    
   }
   toggleDot() //We enable or disable the button based on displayValue
-  console.log("result és " + result);
 }  
 
 
@@ -163,7 +164,6 @@ function display(number) {
 
 document.addEventListener('keydown', keySupport); //Keyboard suport
 function keySupport(e) {
-  console.log(e.code);
   switch(e.code) {
     case 'Numpad0':
     case 'Digit0':
@@ -223,6 +223,7 @@ function keySupport(e) {
     case 'Backspace':
       processInput('backspace');
       break
+    case 'NumpadDecimal':
     case 'Period':
       processInput('.');
       break   
@@ -234,3 +235,4 @@ function keySupport(e) {
 
 
 
+//Pk porres pots posar diversos punts? Pk una cosa és deshabiltiat el botó i l'altra sumar els punts
